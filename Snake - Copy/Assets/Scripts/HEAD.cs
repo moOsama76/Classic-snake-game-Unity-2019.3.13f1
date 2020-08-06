@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -29,60 +29,69 @@ public class HEAD : MonoBehaviour
         if(Input.GetKeyDown("w")){
             if(bodyParts.Length == 1){
                 bodyParts[0].GetComponent<BODY>().direc = "up";
+
             } else if (checkWS()){
                 bodyParts[0].GetComponent<BODY>().direc = "up";
                 Instantiate(directions[2], transform.position, Quaternion.identity);
+
             }
          
 
-        }   
-        else if(Input.GetKeyDown("s")){
-                    if(bodyParts.Length == 1){
-                        bodyParts[0].GetComponent<BODY>().direc = "down";
-                    } else if (checkWS()){
-                        bodyParts[0].GetComponent<BODY>().direc = "down";
-                        Instantiate(directions[3], transform.position, Quaternion.identity); 
-                    }
-        }   
-        else if(Input.GetKeyDown("d")){
-                    if(bodyParts.Length == 1){
-                        bodyParts[0].GetComponent<BODY>().direc = "right";
-                    } else if (checkAD()){
-                        bodyParts[0].GetComponent<BODY>().direc = "right";
-                        Instantiate(directions[0], transform.position, Quaternion.identity);  
-                    }                  
-                                           
-        }    
-        else if(Input.GetKeyDown("a")){
-                    if(bodyParts.Length == 1){
-                        bodyParts[0].GetComponent<BODY>().direc = "left";
-                    } else if(checkAD()){
-                        bodyParts[0].GetComponent<BODY>().direc = "left";
-                        Instantiate(directions[1], transform.position, Quaternion.identity);  
+        } else if(Input.GetKeyDown("s")){
+            if(bodyParts.Length == 1){ 
+                bodyParts[0].GetComponent<BODY>().direc = "down";
 
-                    }
+            } else if (checkWS()){
+                bodyParts[0].GetComponent<BODY>().direc = "down";
+                Instantiate(directions[3], transform.position, Quaternion.identity); 
+
+            }
+        } else if(Input.GetKeyDown("d")){
+            if(bodyParts.Length == 1){
+                bodyParts[0].GetComponent<BODY>().direc = "right";
+
+            } else if (checkAD()){
+                bodyParts[0].GetComponent<BODY>().direc = "right";
+                Instantiate(directions[0], transform.position, Quaternion.identity); 
+
+            }                  
+                                           
+        } else if(Input.GetKeyDown("a")){
+            if(bodyParts.Length == 1){
+                bodyParts[0].GetComponent<BODY>().direc = "left";
+
+            } else if(checkAD()){
+                bodyParts[0].GetComponent<BODY>().direc = "left";
+                Instantiate(directions[1], transform.position, Quaternion.identity);  
+
+            }
 
         } 
         
               
 
-                                                                                                                                                               /////////
-        if( transform.position == egg.transform.position){
-            reLocate(); 
-            growUp();
-            points++;
-            pointLable.GetComponent<Text>().text = points.ToString();
+        for(int i = 0; i < bodyParts.Length; i++){                                                                                                                                                    /////////
+            if( bodyParts[i].transform.position == egg.transform.position){
+                reLocate(); 
+                growUp();
+                points++;
+                pointLable.GetComponent<Text>().text = points.ToString();
+                break;
+            }
         }   
+
         if(transform.position.x > 4.6 || transform.position.x < -4.6 || transform.position.y > 4.6 || transform.position.y < -4.6 ){
                     loseLable.SetActive(true);
                     Time.timeScale = 0;
         }
+
         for(int i = 1; i < bodyParts.Length; i++){
             if(bodyParts[0].transform.position == bodyParts[i].transform.position ){
                     loseLable.SetActive(true);
                     Time.timeScale = 0;  
             }
-        }         
+        }  
+
         if(Input.GetKey("space")){
             Application.LoadLevel(0);
             Time.timeScale = 1;        
